@@ -1,0 +1,4 @@
+question.py   NL => keywords
+query.py      keywords => webpages
+arrange.py    webpages => sentences abouts
+answer.py     sentences => short paragragh

@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<package>
+  <name>ros_robotrc</name>
+  <version>0.0.1</version>
+  <description>Robot machine program intelligent switcher</description>
+
+  <maintainer email="bot@lab.kahsolt.tk">bot</maintainer>
+  <license>LGPLv3</license>
+  <author email="kahsolt@qq.com">Kahsolt</author>
+  <url type="website">http://lab.kahsolt.tk/ros</url>
+  <url type="tutorial">http://lab.kahsolt.tk/ros/ros_robotrc</url>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <build_depend>rospy</build_depend>
+  <build_depend>std_msgs</build_depend>
+  <build_depend>message_runtime</build_depend>
+  <build_depend>message_generation</build_depend>
+
+  <run_depend>rospy</run_depend>
+  <run_depend>std_msgs</run_depend>
+  <run_depend>message_runtime</run_depend>
+  <run_depend>message_generation</run_depend>
+
+  <!-- <test_depend>gtest</test_depend> -->
+
+  <export></export>
+</package>

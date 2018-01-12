@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="content-type" content="text/html; charset=utf8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="w3.css">
+  <script type="text/javascript" src="eventemitter2.min.js"></script>
+  <script type="text/javascript" src="roslib.min.js"></script>
+  <!--
+  <script type="text/javascript" src="http://cdn.robotwebtools.org/EventEmitter2/current/eventemitter2.min.js"></script>
+  <script type="text/javascript" src="http://cdn.robotwebtools.org/roslibjs/current/roslib.min.js"></script>
+-->
+</head>
+
+<body class="w3-content">
+  <div class="w3-row">
+    <div class="w3-container w3-blue w3-text-white">
+      <p>ros_botrc debuglogger</p>
+    </div>
+    <div class="w3-container w3-half w3-pale-yellow" id="client_console"></div>
+    <div class="w3-container w3-half w3-pale-red" id="server_console"></div>
+  </div>
+</body>
+
+<script type="text/javascript" type="text/javascript">
+  // Connecting to ROS
+  var ros = new ROSLIB.Ros({
+    url: 'ws://lab.kahsolt.tk:9090'
+  });
+  ros.on('connection', function () {
+    console.log('Connected to websocket server.');
+  });
+  ros.on('error', function (error) {
+    console.log('Error connecting to websocket server: ', error);
+    alert("Websocket Erorr!");
+  });
+  ros.on('close', function () {
+    console.log('Connection to websocket server closed.');
+    alert("Websocket Erorr!");
+  });
+
+  var clientlogger = new ROSLIB.Topic({
+    ros: ros,
+    name: '/botrc_client_dbg',
+    messageType: 'std_msgs/String'
+  });
+  clientlogger.subscribe(function (message) {
+    var logger = document.getElementById('client_console');
+    var p = document.createElement('div');
+    p.style.wordWrap = 'break-word';
+    p.style.width = 'auto';
+    p.innerHTML = message.data; //clientlogger.name
+    logger.appendChild(p);
+    if (logger.childNodes.length > 22)
+      logger.removeChild(logger.firstChild);
+    logger.scrollTop = logger.scrollHeight;
+    // console.log(clientlogger.name + ': ' + message.data);
+  });
+  var serverlogger = new ROSLIB.Topic({
+    ros: ros,
+    name: '/botrc_server_dbg',
+    messageType: 'std_msgs/String'
+  });
+  serverlogger.subscribe(function (message) {
+    var logger = document.getElementById('server_console');
+    var p = document.createElement('div');
+    p.style.wordWrap = 'break-word';
+    p.style.width = 'auto';
+    p.innerHTML = message.data;
+    logger.appendChild(p);
+    if (logger.childNodes.length > 22)
+      logger.removeChild(logger.firstChild);
+    logger.scrollTop = logger.scrollHeight;
+    // console.log(serverlogger.name + ': ' + message.data);
+  });
+
+</script>
+
+</html>

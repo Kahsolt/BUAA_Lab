@@ -1,0 +1,10 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<h3>Collection List:</h3>
+<ol class="w3-ul w3-hover-light-blue">
+    {% for c in collections %}
+        <li><a href="/{{ c }}">{{ c }}</a></li>
+    {% endfor %}
+</ol>
+{% endblock %}

@@ -1,0 +1,4 @@
+int32 deviceType
+---
+string program
+string url

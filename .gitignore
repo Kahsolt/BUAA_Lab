@@ -1,3 +1,7 @@
 # Python bytecode
 */__pycache__
 *.py[cod]
+
+# zip files
+*.zip
+*.7z
